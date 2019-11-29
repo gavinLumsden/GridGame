@@ -21,7 +21,7 @@ public class Location
         if      (type == Types.HERO)    tile.setImage(Types.HERO_IMAGE);
         else if (type == Types.BOUNDRY) tile.setColor(Types.BOUNDRY_IMAGE);
         else if (type == Types.ENEMY)   tile.setImage(Types.ENEMY_IMAGE);
-        else                            tile.setImage(Types.GROUND_IMAGE);
+        else if (type == Types.GROUND)  tile.setImage(Types.GROUND_IMAGE);
     }
     
 }

@@ -24,6 +24,8 @@ public class Hero
         this.grid      = grid;
         boundry = new Boundary(locations);
         this.locations[row][column].type = Types.HERO;
+        previousTile = Types.GROUND; 
+        currentTile  = Types.HERO; 
         redraw();
     }
     
@@ -32,6 +34,7 @@ public class Hero
         locations[this.row][this.column].type = previousTile;
         this.row    = row;
         this.column = column;
+        currentTile = locations[row][column].type; 
         locations[row][column].type = Types.HERO;
         redraw();
     }
