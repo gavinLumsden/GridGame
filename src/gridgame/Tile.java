@@ -15,6 +15,7 @@ public class Tile
     public int       height;
     public URL       url; 
     public ImageIcon icon; 
+    public String    imageFile; 
     
     public Tile(int width, int height, int x, int y, JFrame frame) {
         tile = new JLabel();
@@ -28,26 +29,26 @@ public class Tile
         tile.setBackground(color);
         tile.setBorder(null);                  // remove border
         tile.setOpaque(false);                 // remove background color
-        show(null);                                 // display picturebox 
     }
     
     public void setImage(String imageFile) {
         if (!imageFile.equals("")) {  // checking to see if there is an image assosiated with this game image
-            setLabelIcon(imageFile);
+            this.imageFile = imageFile; 
+            setLabelIcon();
         }            
         tile.setBorder(null);                  // remove border
         tile.setOpaque(false);                 // remove background color
-        show(imageFile);                                 // display picturebox 
+        show();                                // display picturebox 
     }
 
-    private void show(String imageFile) {
+    private void show() {
         if (imageFile != null) {
-            setLabelIcon(imageFile);
+            setLabelIcon();
         }
         tile.setVisible(true);                     // make label visible
     }
     
-    private void setLabelIcon(String imageFile) {
+    private void setLabelIcon() {
         try {
             this.url = new URL(imageFile);      // set property to parameter
             if (this.url == null) icon = new ImageIcon(imageFile);        // set icon

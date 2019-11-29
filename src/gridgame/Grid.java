@@ -12,21 +12,22 @@ public class Grid extends JFrame
     
     private final double SCALE_FACTOR = 0.045;
         
-    private int frameWidth;
-    private int frameHeight;    
+    public int frameWidth;
+    public int frameHeight;    
     private int tileWidth;
     private int tileHeight;
     private int rows;
     private int columns;
 
     private Location[][] locations;
+    private Boundary     boundary; 
     private Hero         hero;
-    private Enemy        enemy; 
     
     public Grid() {
         setDataStructures();
         setFrame();                
         setActions();
+        trim(); 
         setVisible(true);
     }
 
@@ -39,8 +40,10 @@ public class Grid extends JFrame
         rows        = frameHeight / tileHeight;
         columns     = frameWidth  / tileWidth;
         setTiles();
-        enemy       = new Enemy(locations, this); 
-        hero        = new Hero(locations, this);
+        boundary = new Boundary(locations);
+        House house = new House(locations, this); 
+        Enemy enemy = new Enemy(locations, this); 
+        hero        = new Hero(locations, boundary, this);
     }
     
     private void setFrame() {
@@ -50,7 +53,6 @@ public class Grid extends JFrame
         setBackground(Types.BACKGROUND);
         getContentPane().setBackground(Types.BACKGROUND);        
         setSize(frameWidth, frameHeight);
-        setLocationRelativeTo(null);
     }
     
     private void setTiles() {
@@ -77,4 +79,11 @@ public class Grid extends JFrame
         });
     }
 
+    public void trim() {
+        frameHeight -= (frameHeight - (locations.length * tileHeight));
+        frameWidth -= (frameWidth - (locations[0].length * tileWidth));
+        this.setSize(frameWidth, frameHeight);
+        this.setLocationRelativeTo(null);
+    }
+    
 }

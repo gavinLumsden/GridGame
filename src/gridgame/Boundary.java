@@ -4,13 +4,13 @@ package gridgame;
 public class Boundary 
 {
 
-    private int lowRow;
-    private int highRow;
-    private int lowColumn;
-    private int highColumn;
+    public int lowRow;
+    public int highRow;
+    public int lowColumn;
+    public int highColumn;
     private Location[][] locations;
     
-    private final int BOUNDRY_SPACE = 2;
+    private final int BOUNDRY_SPACE = 1;
     
    
     public Boundary(Location[][] locations) {
@@ -33,7 +33,7 @@ public class Boundary
         if (column > highColumn) return false;
         return true;
     }
-
+    
     private void set(int row, int column, int type) {
         locations[row][column].type = type;
     }
