@@ -44,7 +44,7 @@ public class Grid extends JFrame
         boundary = new Boundary(locations);
         House house = new House(locations, this); 
         Enemy enemy = new Enemy(locations, this); 
-        hero        = new Hero(locations, boundary, this);
+        hero        = new Hero(locations, boundary, this, locations[(locations.length/2)][(locations[0].length/2)].tile.tile);
     }
     
     private void setFrame() {
