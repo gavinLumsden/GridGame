@@ -14,23 +14,6 @@ public class GameObject {
     public GameImage   gameImage; 
     public Mover       mover; 
 
-    /**
-     * Constructor for the class, sets class property data
-     *
-     * @param image picture image used on a user interface
-     */
-    public GameObject(JLabel image) {
-        this(image, 0, Directions.STOP, 0);
-    }
-
-    /**
-     * Constructor for the class, sets class property data
-     *
-     * @param image picture image used on a user interface
-     * @param amount the amount the game character will move
-     * @param direction the direction the game character will move
-     * @param numberOfDirections the number of directions defined
-     */
     public GameObject(JLabel image,
             int amount,
             int direction,
