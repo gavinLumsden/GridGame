@@ -10,9 +10,10 @@ import javax.swing.JLabel;
 public class Tile 
 {
     
-    public JLabel    tile;
+    public boolean   isUpdated; 
     public int       width;
     public int       height;
+    public JLabel    tile;
     public URL       url; 
     public ImageIcon icon; 
     public String    imageFile; 
@@ -23,6 +24,7 @@ public class Tile
         tile.setBorder(Types.TILE_BORDER);
         tile.setBounds(x, y, width, height);
         tile.setOpaque(true);
+        isUpdated = false; 
     }
 
     public void setColor(Color color) {

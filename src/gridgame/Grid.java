@@ -14,8 +14,8 @@ public class Grid extends JFrame
         
     public int frameWidth;
     public int frameHeight;    
-    private int tileWidth;
-    private int tileHeight;
+    public int tileWidth;
+    public int tileHeight;
     private int rows;
     private int columns;
 
@@ -28,6 +28,7 @@ public class Grid extends JFrame
         setFrame();                
         setActions();
         trim(); 
+        hero.setLocation(); 
         setVisible(true);
     }
 

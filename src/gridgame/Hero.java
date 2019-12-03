@@ -5,14 +5,14 @@ import java.awt.event.KeyEvent;
 public class Hero 
 {
 
-    public Location[][] locations;
+    public  Location[][]  locations;
     
+    private int      currentLocation;
+    private int      previousLocation;
     private int      row;
     private int      column;
     private Boundary boundary;
     private Grid     grid;
-    private int      currentTile;
-    private int      previousTile;
     
     public Hero(Location[][] locations, Boundary boundary, Grid grid) {
         this.locations = locations;
@@ -20,17 +20,19 @@ public class Hero
         this.column    = locations[0].length / 2;
         this.grid      = grid;
         this.locations[row][column].type = Types.HERO;
-        previousTile = Types.GROUND; 
-        currentTile  = Types.HERO; 
-        redraw();
+        currentLocation  = locations[row][column].type; 
+        previousLocation = locations[row][column].type; 
+        this.boundary = boundary; 
     }
     
     public void move(int row, int column) {
-        previousTile = currentTile; 
-        locations[this.row][this.column].type = previousTile;
+        locations[this.row][this.column].tile.isUpdated = true; 
+        locations[row][column].tile.isUpdated           = true; 
+        previousLocation = currentLocation; 
+        locations[this.row][this.column].type = previousLocation;
         this.row    = row;
         this.column = column;
-        currentTile = locations[row][column].type; 
+        currentLocation = locations[row][column].type;
         locations[row][column].type = Types.HERO;
         redraw();
     }
@@ -47,11 +49,18 @@ public class Hero
     }
 
     public void redraw() {
-        for (int row = 0; row < locations.length; row++) {
-            for (int column = 0; column < locations[row].length; column++) {
-                locations[row][column].draw();
+        for (int r = 0; r < locations.length; r++) {
+            for (int c = 0; c < locations[0].length; c++) {
+                if (locations[r][c].tile.isUpdated) {
+                    locations[r][c].draw();
+                    locations[r][c].tile.isUpdated = false; 
+                }
             }
         }
+    }
+
+    public void setLocation() {
+        locations[row][column].type = Types.HERO; 
     }
     
 }
