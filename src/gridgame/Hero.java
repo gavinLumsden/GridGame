@@ -20,8 +20,8 @@ public class Hero
         this.column    = locations[0].length / 2;
         this.grid      = grid;
         this.locations[row][column].type = Types.HERO;
-        currentLocation  = locations[row][column].type; 
-        previousLocation = locations[row][column].type; 
+        currentLocation  = Types.GROUND; 
+        previousLocation = Types.GROUND; 
         this.boundary = boundary; 
     }
     
