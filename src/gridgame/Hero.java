@@ -1,43 +1,37 @@
 package gridgame; 
 
-import gametools.Icons;
 import gametools.Animation;
+import collections.LinkedList;
 import gametools.Directions;
-import gametools.GameObject;
+import gametools.GameCharacter;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel; 
-import collections.LinkedList;
-import gametools.UserInput;
 
-public class Hero extends GameObject
+public class Hero extends GameCharacter
 {
     private LinkedList<Animation> animations; 
     public  Location[][]  locations;
-    public  JLabel          label; 
+    public  JLabel        label; 
     private int           currentLocation;
     private int           previousLocation;
     private int           row;
     private int           column;
     private Boundary      boundary;
     private Grid          grid;
-    public  UserInput     input; 
-    
-    public final int WALK_DELAY = 800;
-    public final int IDLE_DELAY = 100;
     
     private int directionToStop;
 
-    public Hero(Location[][] locations, Boundary boundary, Grid grid) {
-        super(locations[(locations.length/2)][(locations[0].length/2)].tile.tile, 100, Directions.STOP, Directions.FOUR_DIRECTIONS);
+    public Hero(Location[][] locations, Boundary boundary, Grid grid, JLabel label) {
+        super(label, 100, Directions.STOP, Directions.FOUR_DIRECTIONS, 100);
+        this.label                       = label; 
         this.locations                   = locations;
         this.row                         = locations.length    / 2;
         this.column                      = locations[0].length / 2;
         this.grid                        = grid;
+        this.boundary                    = boundary; 
         this.locations[row][column].type = Types.HERO;
         currentLocation                  = Types.GROUND; 
         previousLocation                 = Types.GROUND; 
-        this.boundary                    = boundary; 
-        input = new UserInput(coordinates, Directions.FOUR_DIRECTIONS); 
         setAnimations(); 
     }
     
@@ -104,56 +98,8 @@ public class Hero extends GameObject
         animations.add(stopLeftAnimation);
         animations.add(stopRightAnimation);
 
-        label.animations.get(5); 
-        locations[row][column].tile.animation.run();
-    }
-    
-    public void animate() {
-        if (locations[row][column].tile.animation == null) return; 
-        if (coordinates.direction == Directions.UP) {
-            if (locations[row][column].tile.animation.isRunning() == false) {
-                directionToStop = Directions.UP; 
-                locations[row][column].tile.animation = animations.get(0); 
-                locations[row][column].tile.animation.run();
-            }
-            directionToStop = Directions.UP;
-        } else if (coordinates.direction == Directions.DOWN) {
-            if (locations[row][column].tile.animation.isRunning() == false) {
-                directionToStop = Directions.DOWN; 
-                locations[row][column].tile.animation = animations.get(1); 
-                locations[row][column].tile.animation.run();
-            }
-            directionToStop = Directions.DOWN;
-        } else if (coordinates.direction == Directions.LEFT) {
-            if (locations[row][column].tile.animation.isRunning() == false) {
-                directionToStop = Directions.LEFT; 
-                locations[row][column].tile.animation = animations.get(2); 
-                locations[row][column].tile.animation.setLabel(locations[row][column].tile.tile); 
-                locations[row][column].tile.animation.run();
-            }
-            directionToStop = Directions.LEFT;
-        } else if (coordinates.direction == Directions.RIGHT) {
-            if (locations[row][column].tile.animation.isRunning() == false) {
-                directionToStop = Directions.RIGHT; 
-                locations[row][column].tile.animation = animations.get(3); 
-                locations[row][column].tile.animation.run();
-            }
-            directionToStop = Directions.RIGHT;
-        } else if (coordinates.direction == Directions.STOP) {
-            if (directionToStop == Directions.UP) {
-                locations[row][column].tile.animation = animations.get(4); 
-                locations[row][column].tile.animation.run();
-            } else if (directionToStop == Directions.DOWN) {
-                locations[row][column].tile.animation = animations.get(5); 
-                locations[row][column].tile.animation.run();
-            } else if (directionToStop == Directions.LEFT) {
-                locations[row][column].tile.animation = animations.get(6); 
-                locations[row][column].tile.animation.run();
-            } else if (directionToStop == Directions.RIGHT) {
-                locations[row][column].tile.animation = animations.get(7); 
-                locations[row][column].tile.animation.run();
-            }
-        }
+        sprite.setAnimations(animations);
+        sprite.animate(5);
     }
     
     public void move(int row, int column) {
@@ -168,9 +114,9 @@ public class Hero extends GameObject
         currentLocation = locations[row][column].type;
         locations[row][column].type = Types.HERO;
         animate(); 
-        redraw();
     }
 
+    @Override
     public void keyPress(KeyEvent event) {
         if      (event.getKeyCode() == KeyEvent.VK_ESCAPE) System.exit(0);
         int row    = this.row;
@@ -188,7 +134,6 @@ public class Hero extends GameObject
         for (int r = 0; r < locations.length; r++) {
             for (int c = 0; c < locations[0].length; c++) {
                 if (locations[r][c].tile.isUpdated) {
-                    gameImage.redraw(coordinates);
                     locations[r][c].draw();
                     locations[r][c].tile.isUpdated = false; 
                 }
@@ -196,8 +141,9 @@ public class Hero extends GameObject
         }
     }
 
-    public void setLocation() {
-        locations[row][column].type = Types.HERO; 
+    @Override
+    public void action() {
+        redraw(); 
     }
     
 }

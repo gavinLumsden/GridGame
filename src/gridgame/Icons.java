@@ -1,4 +1,4 @@
-package gametools;
+package gridgame;
 
 /**
  * @author g.lumsden

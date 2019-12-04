@@ -1,11 +1,16 @@
 package gametools;
 
-import collections.LinkedList;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -19,9 +24,6 @@ import javax.swing.SwingConstants;
  * @since 14-May-2019
  */
 public class GameImage {
-
-    private LinkedList<Animation> animations;
-    private int currentIndex;
 
     private JLabel label;
     private String imageFile;
@@ -69,6 +71,22 @@ public class GameImage {
         this.label = label;                         // set parameter to property
         setImage(imageFile);                        // set image
     }
+
+    /**
+     * Constructor for the class, sets class properties
+     *
+     * @param label the label used to display the image
+     * @param spriteSheet imageFile the new image file to change the label to
+     * @param x the x coordinate of the sprite sheet frame location
+     * @param y the y coordinate of the sprite sheet frame location
+     * @param width the width of the sprite sheet frame
+     * @param height the height coordinate of the sprite sheet frame
+     */
+    public GameImage(JLabel label, String spriteSheet, int x, int y,
+            int width, int height) {
+        this.label = label;                         // set parameter to property
+        setImage(spriteSheet, x, y, width, height); // set image from sheet
+    }
     
     private void setLabelIcon() {
         try {
@@ -90,7 +108,6 @@ public class GameImage {
             setLabelIcon();
         }
         label.setVisible(true);                     // make label visible
-        run();
     }
 
     /**
@@ -99,7 +116,6 @@ public class GameImage {
     public void hide() {
         label.setIcon(null);                        // removes any image
         label.setVisible(false);                    // make label invisible
-        stop();
     }
 
     /**
@@ -110,13 +126,6 @@ public class GameImage {
      */
     public void resize(int width, int height) {
         label.setSize(width, height);                   // resize label
-        if (animations == null) {
-            return;                 // error trap
-        }
-        for (int i = 0; i < animations.size(); i++) {   // traverse animations
-            animations.get(i).resize(width, height);     // resize each animation
-        }
-        resizeToContainer();                            // resize images
     }
 
     /**
@@ -133,12 +142,39 @@ public class GameImage {
         Image newImage = originalImage.getScaledInstance(
                 width, height, Image.SCALE_SMOOTH);
         icon = new ImageIcon(newImage);  // set new image
-        if (animations == null) {
-            return;                 // error trap
+//        setLabelIcon();                            // set icon to label
+    }
+
+    /**
+     * Update the coordinates of the GameImage current location data
+     *
+     * @param coordinates the coordinates object to update
+     */
+    public void update(Coordinates coordinates) {
+        if (coordinates == null) {
+            coordinates = new Coordinates();
         }
-        for (int i = 0; i < animations.size(); i++) {   // traverse animations
-            animations.get(i).resizeToContainer();      // resize images
+        coordinates.x = label.getX();
+        coordinates.y = label.getY();
+        coordinates.width = label.getWidth();
+        coordinates.height = label.getHeight();
+        coordinates.recalculate();
+    }
+
+    /**
+     * Re-positions GameImage in it's container based on coordinate data
+     *
+     * @param coordinates the coordinates object to re-position to
+     */
+    public void redraw(Coordinates coordinates) {
+        if (coordinates == null) {
+            return;            // error trap
         }
+        int x = coordinates.x;
+        int y = coordinates.y;
+        int w = coordinates.width;
+        int h = coordinates.height;
+        label.setBounds(x, y, w, h);
     }
 
     public void setImage(String imageFile) {
@@ -149,6 +185,43 @@ public class GameImage {
         label.setBorder(null);                  // remove border
         label.setOpaque(false);                 // remove background color
         show();                                 // display picturebox 
+    }
+
+    /**
+     * Change the image inside a label to a new image from a sprite sheet and
+     * possibly resize the image to fit the label size
+     *
+     * @param spriteSheet imageFile the new image file to change the label to
+     * @param x the x coordinate of the sprite sheet frame location
+     * @param y the y coordinate of the sprite sheet frame location
+     * @param width the width of the sprite sheet frame
+     * @param height the height coordinate of the sprite sheet frame
+     */
+    public void setImage(
+            String spriteSheet,
+            int x,
+            int y,
+            int width,
+            int height) {
+        this.imageFile = spriteSheet;             // set property to parameter
+        try {
+            URL url = getClass().getResource(spriteSheet); // URL
+            URI uri = url.toURI();           // convert to URI
+            File file = new File(uri);         // create file
+            BufferedImage bigImage = ImageIO.read(file);
+            BufferedImage subImage = bigImage.getSubimage(x, y, width, height);
+            label.setBorder(null);              // remove border
+            label.setOpaque(false);             // remove background color
+            label.setText("");
+            icon = new ImageIcon(subImage);     // set icon
+            label.setIcon(icon);                // set icon to label            
+        } catch (IOException ex) {
+            System.out.println("File read error: " + ex.toString());
+        } catch (URISyntaxException ex) {
+            System.out.println("File convert error: " + ex.toString());
+        }
+        show();                                 // display picturebox 
+        resizeToContainer();                    // resize
     }
 
     /**
@@ -192,7 +265,6 @@ public class GameImage {
         label.setBackground(color);             // set background color
         label.setForeground(invert(color));     // set foreground to opposite
         label.setText("");                      // remove any text
-        stop();
     }
 
     /**
@@ -275,206 +347,4 @@ public class GameImage {
         label.setLocation(x, y);
     }
 
-     //////////////////////////////
-    
-
-    /**
-     * Sets the animations from the passed data
-     *
-     * @param animations the animation objects for this game image
-     */
-    public void setAnimations(LinkedList<Animation> animations) {
-        this.animations = animations;                   // assign to property
-        for (int i = 0; i < animations.size(); i++) {   // traverse array
-            animations.get(i).stop();                   // stop each animation
-        }
-        run();                                          // run first animation
-    }
-
-    /**
-     * Animate the passed index value
-     *
-     * @param index the index of the animation to run
-     */
-    public void animate(int index) {
-        animations.get(currentIndex).stop();       // stop current animation
-        run(index);                         // run passed animation index
-        currentIndex = index;               // remember passed index
-    }
-
-    /**
-     * Stops all animations
-     */
-    public void stop() {
-        if (animations == null) {
-            return;                 // error trap
-        }
-        for (int i = 0; i < animations.size(); i++) {   // traverse animations
-            stop(i);                                    // stop animation
-        }
-    }
-
-    /**
-     * Stops the passed animation
-     *
-     * @param index the animation index to stop
-     */
-    public void stop(int index) {
-        if (animations == null) {
-            return;                 // error trap
-        }
-        animations.get(index).stop();                   // stop animation
-    }
-
-    /**
-     * Runs the passed animation
-     *
-     * @param index the animation index to run
-     */
-    public void run(int index) {
-        if (animations == null) {
-            return;                 // error trap
-        }
-        animations.get(currentIndex).stop();
-        if (animations.get(index).isRunning() == false) {
-            animations.get(index).run();
-        }                    // run animation
-        currentIndex = index;
-    }
-
-    /**
-     * Runs the first animation
-     */
-    public void run() {
-        if (animations == null) {
-            return;                     // error trap
-        }
-        if (animations.get(0).isRunning() == false) {
-            run(0); // run first animation
-        }
-    }
-
-    /**
-     * Restarts the passed animation back to the first frame
-     *
-     * @param index the animation to restart
-     */
-    public void restart(int index) {
-        animations.get(index).restart();
-    }
-
-    /**
-     * Restarts all animations back to the first frame
-     */
-    public void restart() {
-        stop();                                 // stops all animations
-        restart(0);                             // restarts first animation
-    }
-
-    /**
-     * Sets the passed animation to loop (repeat from the last frame back to the
-     * first frame) or not
-     *
-     * @param index the animation to set the loop to
-     * @param shouldLoop should the animation loop (true) or not (false)
-     */
-    public void setLoop(int index, boolean shouldLoop) {
-        animations.get(index).setLoop(shouldLoop);
-    }
-
-    /**
-     * Sets all animations to loop (repeat from the last frame back to the first
-     * frame) or not
-     *
-     * @param shouldLoop should all animations loop (true) or not (false)
-     */
-    public void setLoop(boolean shouldLoop) {
-        for (int i = 0; i < animations.size(); i++) {   // traverse animations
-            setLoop(i, shouldLoop);                      // set animation loop
-        }
-    }
-
-    /**
-     * Set the delay (in milliseconds) for the passed animation
-     *
-     * @param index the animation to set the loop to
-     * @param delay the delay (in milliseconds) for the passed animation
-     */
-    public void setDelay(int index, int delay) {
-        animations.get(index).setDelay(delay);
-    }
-
-    /**
-     * Set all delays (in milliseconds) for all animations
-     *
-     * @param delay the delay (in milliseconds) for all animations
-     */
-    public void setDelay(int delay) {
-        for (int i = 0; i < animations.size(); i++) {   // traverse animations
-            setDelay(i, delay);                          // set animation delay
-        }
-    }
-
-    /**
-     * Sets all the frame image files for the passed animation
-     *
-     * @param index the animation to set the image files to
-     * @param imageFiles the array of relative image file names
-     */
-    private void setImageFiles(int index, LinkedList<String> imageFiles) {
-        animations.get(index).setImageFiles(imageFiles);
-    }
-
-    /**
-     * Gets the frames per second (FPS) for the passed animation
-     *
-     * @param index the animation to get the FPS from
-     * @return the frames per second (FPS) for the passed animation
-     */
-    public int getFPS(int index) {
-        return animations.get(index).getFPS();
-    }
-
-    /**
-     * Determines if the passed animation is running (true) or not (false)
-     *
-     * @param index the animation to determine if running
-     * @return the passed animation is running (true) or not (false)
-     */
-    public boolean isRunning(int index) {
-        return animations.get(index).isRunning();
-    }
- 
-    /**
-     * Update the coordinates of the GameImage current location data
-     *
-     * @param coordinates the coordinates object to update
-     */
-    public void update(Coordinates coordinates) {
-        if (coordinates == null) {
-            coordinates = new Coordinates();
-        }
-        coordinates.x = label.getX();
-        coordinates.y = label.getY();
-        coordinates.width = label.getWidth();
-        coordinates.height = label.getHeight();
-        coordinates.recalculate();
-    }
-    
-    /**
-     * Re-positions GameImage in it's container based on coordinate data
-     *
-     * @param coordinates the coordinates object to re-position to
-     */
-    public void redraw(Coordinates coordinates) {
-        if (coordinates == null) {
-            return;            // error trap
-        }
-        int x = coordinates.x;
-        int y = coordinates.y;
-        int w = coordinates.width;
-        int h = coordinates.height;
-        label.setBounds(x, y, w, h);
-    }
-    
 }

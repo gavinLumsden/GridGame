@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 
 public class Grid extends JFrame
@@ -27,24 +28,24 @@ public class Grid extends JFrame
         setDataStructures();
         setFrame();                
         setActions();
-        trim(); 
-        hero.setLocation(); 
+        trim();  
         setVisible(true);
     }
 
     private void setDataStructures() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frameWidth  = (int)screenSize.getWidth();
-        frameHeight = (int)screenSize.getHeight();  
-        tileWidth   = (int)((double)frameWidth * SCALE_FACTOR);
-        tileHeight  = tileWidth;
-        rows        = frameHeight / tileHeight;
-        columns     = frameWidth  / tileWidth;
+        frameWidth           = (int)screenSize.getWidth();
+        frameHeight          = (int)screenSize.getHeight();  
+        tileWidth            = (int)((double)frameWidth * SCALE_FACTOR);
+        tileHeight           = tileWidth;
+        rows                 = frameHeight / tileHeight;
+        columns              = frameWidth  / tileWidth;
         setTiles();
-        boundary = new Boundary(locations);
-        House house = new House(locations, this); 
-        Enemy enemy = new Enemy(locations, this); 
-        hero        = new Hero(locations, boundary, this);
+        boundary             = new Boundary(locations);
+        House house          = new House(locations, this); 
+        Enemy enemy          = new Enemy(locations, this); 
+        JLabel heroImage     = new JLabel(); 
+        hero                 = new Hero(locations, boundary, this, heroImage);
     }
     
     private void setFrame() {
