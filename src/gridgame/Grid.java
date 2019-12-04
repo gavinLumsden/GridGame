@@ -10,8 +10,6 @@ import javax.swing.JLabel;
 
 public class Grid extends JFrame
 {
-    
-    private final double SCALE_FACTOR = 0.045;
         
     public int frameWidth;
     public int frameHeight;    
@@ -24,28 +22,40 @@ public class Grid extends JFrame
     private Boundary     boundary; 
     private Hero         hero;
     
+    private int[][] map = {
+        {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,3,0,0,3,0,0,3,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+        {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
+    }; 
+    
     public Grid() {
         setDataStructures();
-        setFrame();                
+        setFrame();    
+        setHero(); 
         setActions();
         trim();  
         setVisible(true);
     }
 
     private void setDataStructures() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frameWidth           = (int)screenSize.getWidth();
-        frameHeight          = (int)screenSize.getHeight();  
-        tileWidth            = (int)((double)frameWidth * SCALE_FACTOR);
-        tileHeight           = tileWidth;
+        frameWidth           = 1900;
+        frameHeight          = 1000;
+        tileWidth            = 90;
+        tileHeight           = 90;
         rows                 = frameHeight / tileHeight;
         columns              = frameWidth  / tileWidth;
         setTiles();
         boundary             = new Boundary(locations);
         House house          = new House(locations, this); 
         Enemy enemy          = new Enemy(locations, this); 
-        JLabel heroImage     = new JLabel(); 
-        hero                 = new Hero(locations, boundary, this, heroImage);
     }
     
     private void setFrame() {
@@ -59,15 +69,14 @@ public class Grid extends JFrame
     
     private void setTiles() {
         locations = new Location[rows][columns];
-        int y = 0;  
-        for (int row = 0; row < rows; row++) {
-            int x = 0;
-            for (int column = 0; column < columns; column++) {
-                locations[row][column] = new Location(row,column,x,y,
-                        tileWidth,tileHeight,Types.GROUND,this);                
-                x += tileWidth;
+        int y = 0; 
+        for (int r = 0; r < locations.length; r++) {
+            int x = 0; 
+            for (int c = 0; c < locations[0].length; c++) {
+                locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, map[r][c], this); 
+                x += tileWidth; 
             }
-            y += tileHeight;
+            y += tileWidth; 
         }
     }
 
@@ -77,7 +86,9 @@ public class Grid extends JFrame
             public void keyPressed(KeyEvent e) {                 
                 hero.keyPress(e);
             } 
-            public void keyReleased(KeyEvent e) { }
+            public void keyReleased(KeyEvent e) {
+                hero.mover.stop();
+            }
         });
     }
 
@@ -86,6 +97,16 @@ public class Grid extends JFrame
         frameWidth -= (frameWidth - (locations[0].length * tileWidth));
         this.setSize(frameWidth, frameHeight);
         this.setLocationRelativeTo(null);
+    }
+
+    private void setHero() {
+        JLabel heroImage = new JLabel();
+        this.getContentPane().add(heroImage);
+        heroImage.setBorder(Types.TILE_BORDER);
+        heroImage.setBounds((locations.length/2), (locations[0].length/2), tileWidth, tileHeight);
+        heroImage.setOpaque(true);
+        this.getContentPane().setComponentZOrder(heroImage, 0);
+        hero = new Hero(boundary, heroImage);
     }
     
 }

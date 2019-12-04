@@ -10,7 +10,6 @@ public class Types
     public static final String PATH = "https://drive.google.com/uc?id=";
     
     public static int GROUND  = 0;
-    public static int HERO    = 1;
     public static int BOUNDRY = 2;
     public static int ENEMY   = 3;
     public static int HOUSE   = 4;

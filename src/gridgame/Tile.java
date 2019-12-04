@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 public class Tile 
 {
     
-    public boolean   isUpdated; 
     public int       width;
     public int       height;
     public JLabel    tile;
@@ -25,7 +24,6 @@ public class Tile
         tile.setBorder(Types.TILE_BORDER);
         tile.setBounds(x, y, width, height);
         tile.setOpaque(true);
-        isUpdated = false; 
     }
 
     public void setColor(Color color) {

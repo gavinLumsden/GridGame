@@ -14,7 +14,7 @@ public interface Icons {
     public static final String BANDIT_IDLE_RIGHT = PATH + "1TxJoppgbRb1le0PzE3-4ooemaOCJhpuC"; 
     
     public static final String BANDIT_WALK_UP_1    = PATH + "1YrYuN5DsWat5a2X-1qdbBuPnbYCILhID"; 
-    public static final String BANDIT_WALK_DOWN_1  = PATH + "1fiQf73-XMgMSQIjky9pYHeGrK7Q96Is"; 
+    public static final String BANDIT_WALK_DOWN_1  = PATH + "1fiQf73-XMgMSQIjky9pYHeGrK7Q96Is_"; 
     public static final String BANDIT_WALK_LEFT_1  = PATH + "14m54_ezCxEqxUDh083fYwrnJrOOWNP8v"; 
     public static final String BANDIT_WALK_RIGHT_1 = PATH + "1VGE_uV7modMLi7vsU2adudawheRvhNHu"; 
     

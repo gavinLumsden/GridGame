@@ -31,6 +31,7 @@ public class UserInput {
      */
     public void keypress(KeyEvent event) {
         int key = event.getKeyCode();
+        if (key == KeyEvent.VK_ESCAPE) System.exit(0);
         if (numberOfDirections == Directions.TWO_DIRECTIONS) {
             if (key == KeyEvent.VK_LEFT) {
                 source.direction = Directions.LEFT;

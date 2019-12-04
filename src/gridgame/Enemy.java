@@ -15,10 +15,7 @@ public class Enemy {
     
     public Enemy(Location[][] locations, Grid grid) {
         this.locations = locations;
-        this.row       = 5;
-        this.column    = 5;
         this.grid      = grid;
-        this.locations[row][column].type = Types.ENEMY;
         redraw();
     }
     

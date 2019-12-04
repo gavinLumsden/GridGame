@@ -15,10 +15,7 @@ public class House {
     
     public House(Location[][] locations, Grid grid) {
         this.locations = locations;
-        this.row       = 6;
-        this.column    = 6;
         this.grid      = grid;
-        this.locations[row][column].type = Types.HOUSE;
         redraw();
     }
     
