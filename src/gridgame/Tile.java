@@ -1,6 +1,5 @@
 package gridgame; 
 
-import gametools.Animation;
 import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;

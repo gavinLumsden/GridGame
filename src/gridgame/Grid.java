@@ -25,12 +25,12 @@ public class Grid extends JFrame
     private int[][] map = {
         {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
         {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,3,0,0,3,0,0,3,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,3,0,3,0,3,3,3,3,3,0,0,0,0,0,0,0,0,2},
+        {2,0,0,3,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,3,3,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,3,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,2},
+        {2,0,0,3,0,3,0,3,3,3,3,3,0,0,4,4,0,0,0,0,2},
+        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,2},
         {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
         {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
         {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
@@ -103,10 +103,10 @@ public class Grid extends JFrame
         JLabel heroImage = new JLabel();
         this.getContentPane().add(heroImage);
         heroImage.setBorder(Types.TILE_BORDER);
-        heroImage.setBounds((locations.length/2), (locations[0].length/2), tileWidth, tileHeight);
+        heroImage.setBounds(10, 10, tileWidth, tileHeight);
         heroImage.setOpaque(true);
         this.getContentPane().setComponentZOrder(heroImage, 0);
-        hero = new Hero(boundary, heroImage);
+        hero = new Hero(locations, this, heroImage);
     }
     
 }

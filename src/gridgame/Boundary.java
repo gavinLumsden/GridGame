@@ -1,6 +1,5 @@
 package gridgame; 
 
-
 public class Boundary 
 {
 

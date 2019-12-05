@@ -1,5 +1,7 @@
 package gametools;
 
+import javax.swing.JLabel;
+
 /**
  * Detector.java - methods to detect collision detection in various ways
  *
@@ -141,6 +143,139 @@ public class Detector {
         } else {
             return false;
         }
+    }
+    
+    ///////////////////////////////////////////////////////////// JLabels /////////////////////////////////////////////////////////////////
+    
+    /**
+     * Determines if overlapping with another game object (the target)
+     *
+     * @param target the other game object to check against
+     * @return is overlapping (true) or not (false)
+     */
+    public boolean isOverLapping(JLabel target) {
+        if (target == null) {
+            return false;
+        }
+        if (isOverLappingVertically(target) && isOverLappingHorizontally(target)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determines if overlapping vertically with another game object (target)
+     *
+     * @param gameObject the other game object to check against
+     * @return is overlapping (true) or not (false)
+     */
+    public boolean isOverLappingVertically(JLabel label) {
+        setTarget(label); 
+        if (source.left >= target.left && source.left <= target.right) {
+            return true;
+        } else if (source.right >= target.left && source.right <= target.right) {
+            return true;
+        } else if (target.left >= source.left && target.left <= source.right) {
+            return true;
+        } else if (target.right >= source.left && target.right <= source.right) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determines if overlapping horizontally with another game object (target)
+     *
+     * @param gameObject the other game object to check against
+     * @return is overlapping (true) or not (false)
+     */
+    public boolean isOverLappingHorizontally(JLabel label) {
+        setTarget(label); 
+        if (source.top >= target.top && source.top <= target.bottom) {
+            return true;
+        } else if (source.bottom >= target.top && source.bottom <= target.bottom) {
+            return true;
+        } else if (target.top >= source.top && target.top <= source.bottom) {
+            return true;
+        } else if (target.bottom >= source.top && target.bottom <= source.bottom) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determines if this object is above another game object
+     *
+     * @param gameObject the other game object to check against
+     * @return is above the other object (true) or not (false)
+     */
+    public boolean isAbove(JLabel label) {
+        setTarget(label); 
+        int adjustedBottom = source.top - source.amount;
+        if (adjustedBottom < target.top) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determines if this object is below another game object
+     *
+     * @param gameObject the other game object to check against
+     * @return is below the other object (true) or not (false)
+     */
+    public boolean isBelow(JLabel label) {
+        setTarget(label); 
+        int adjustedTop = source.top + source.amount;
+        if (adjustedTop > target.bottom) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determines if this object is left of another game object
+     *
+     * @param gameObject the other game object to check against
+     * @return is left of the other object (true) or not (false)
+     */
+    public boolean isLeftOf(JLabel label) {
+        setTarget(label); 
+        int adjustedRight = source.right - source.amount;
+        if (adjustedRight < target.left) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determines if this object is right of another game object
+     *
+     * @param gameObject the other game object to check against
+     * @return is right of the other object (true) or not (false)
+     */
+    public boolean isRightOf(JLabel label) {
+        setTarget(label); 
+        int adjustedLeft = source.right + source.amount;
+        if (adjustedLeft > target.right) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private void setTarget(JLabel label) {
+        target.x      = label.getX(); 
+        target.y      = label.getY(); 
+        target.width  = label.getWidth(); 
+        target.height = label.getHeight(); 
+        target.recalculate();
     }
 
 }

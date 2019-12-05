@@ -8,16 +8,17 @@ import javax.swing.JLabel;
 
 public class Hero extends GameCharacter
 {
-    private LinkedList<Animation> animations; 
-    public  JLabel                label; 
-    private Boundary              boundary;
     
-    private int directionToStop;
+    public  JLabel                label; 
+    private LinkedList<Animation> animations; 
+    private Location[][]          locations; 
+    private Grid                  grid; 
 
-    public Hero(Boundary boundary, JLabel label) {
+    public Hero(Location[][] locations, Grid grid, JLabel label) {
         super(label, 50, Directions.STOP, Directions.FOUR_DIRECTIONS, 100);
-        this.label    = label; 
-        this.boundary = boundary; 
+        this.label     = label; 
+        this.locations = locations; 
+        this.grid      = grid; 
         setAnimations(); 
     }
     
@@ -91,13 +92,28 @@ public class Hero extends GameCharacter
     @Override
     public void action() {
         mover.move();
+//        check();
         animate(); 
         redraw(); 
     }
     
-    
-    
-    
+//    private void check() {
+//        if (locations != null) {
+//            for (int r = 0; r < locations.length; r++) {
+//                for (int c = 0; c < locations[0].length; c++) {
+//                    if (locations[r][c].type == Types.BOUNDRY){
+//                        int spotX = locations[r][c].tile.tile.getX(); 
+//                        int spotY = locations[r][c].tile.tile.getY(); 
+//                        JLabel targetLabel = locations[r][c].tile.tile; 
+//                        if (coordinates.x == spotX || coordinates.y == spotY){
+//                            reactor.stickTo(targetLabel);
+//                            return; 
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     
 //    public void move(int row, int column) {
