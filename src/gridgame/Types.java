@@ -1,8 +1,6 @@
 package gridgame; 
 
 import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 
 
 public class Types 
@@ -19,8 +17,6 @@ public class Types
     public static String ENEMY_IMAGE   = PATH + "10G3VmBGb9jCawlQeHUfbdQZLN5ARGGw9"; 
     public static String HOUSE_IMAGE   = PATH + "1G7LiC15joJFSGrlvGOENsxqT7ODdYG4z"; 
     public static String BOUNDRY_IMAGE = PATH + "1hsHMe3DqD9yEmUFcWcyYYTbj0BNf82rt"; 
-    public static Color  BACKGROUND    = Color.yellow;
-    
-    public static Border TILE_BORDER = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1);
+    public static Color  BACKGROUND    = Color.GREEN;
               
 }

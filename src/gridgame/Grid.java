@@ -1,7 +1,5 @@
 package gridgame; 
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
@@ -10,7 +8,8 @@ import javax.swing.JLabel;
 
 public class Grid extends JFrame
 {
-        
+    
+    public static boolean done; 
     public int frameWidth;
     public int frameHeight;    
     public int tileWidth;
@@ -22,27 +21,13 @@ public class Grid extends JFrame
     private Boundary     boundary; 
     private Hero         hero;
     
-    private int[][] map = {
-        {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,3,0,3,0,3,3,3,3,3,0,0,0,0,0,0,0,0,2},
-        {2,0,0,3,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,3,3,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,3,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,3,0,3,0,3,3,3,3,3,0,0,4,4,0,0,0,0,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-        {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-        {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
-    }; 
-    
     public Grid() {
         setDataStructures();
         setFrame();    
         setHero(); 
         setActions();
         trim();  
-        setVisible(true);
+        done = true; 
     }
 
     private void setDataStructures() {
@@ -73,7 +58,7 @@ public class Grid extends JFrame
         for (int r = 0; r < locations.length; r++) {
             int x = 0; 
             for (int c = 0; c < locations[0].length; c++) {
-                locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, map[r][c], this); 
+                locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, Map.map[r][c], this); 
                 x += tileWidth; 
             }
             y += tileWidth; 
@@ -102,7 +87,6 @@ public class Grid extends JFrame
     private void setHero() {
         JLabel heroImage = new JLabel();
         this.getContentPane().add(heroImage);
-        heroImage.setBorder(Types.TILE_BORDER);
         heroImage.setBounds(10, 10, tileWidth, tileHeight);
         heroImage.setOpaque(true);
         this.getContentPane().setComponentZOrder(heroImage, 0);

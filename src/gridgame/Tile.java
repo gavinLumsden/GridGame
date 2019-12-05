@@ -20,7 +20,6 @@ public class Tile
     public Tile(int width, int height, int x, int y, JFrame frame) {
         tile = new JLabel();
         frame.getContentPane().add(tile);
-        tile.setBorder(Types.TILE_BORDER);
         tile.setBounds(x, y, width, height);
         tile.setOpaque(true);
     }
