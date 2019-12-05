@@ -6,7 +6,8 @@ package gametools;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class Directions {
+public class Directions 
+{
 
     // type of game movements
     public static final int TWO_DIRECTIONS = 2;

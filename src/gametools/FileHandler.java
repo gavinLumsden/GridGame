@@ -16,7 +16,8 @@ import java.net.URL;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class FileHandler {
+public class FileHandler 
+{
 
     private String filename;
 

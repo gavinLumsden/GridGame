@@ -15,7 +15,8 @@ import javax.swing.Timer;
  * @param <T>
  * @since 14-May-2019
  */
-public class Animation <T> {
+public class Animation <T> 
+{
 
     private JLabel label;
     private LinkedList<GameImage> frames;

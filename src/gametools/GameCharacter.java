@@ -12,7 +12,8 @@ import javax.swing.Timer;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public abstract class GameCharacter extends GameObject {
+public abstract class GameCharacter extends GameObject 
+{
 
     /**
      * Controls the user input actions for this game character

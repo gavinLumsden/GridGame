@@ -1,7 +1,6 @@
 package gridgame; 
 
-
-public class Location 
+public class Location
 {
 
     public int row;

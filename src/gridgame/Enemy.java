@@ -3,7 +3,8 @@ package gridgame;
 /**
  * @author g.lumsden
  */
-public class Enemy {
+public class Enemy 
+{
     
     public Location[][] locations;
     

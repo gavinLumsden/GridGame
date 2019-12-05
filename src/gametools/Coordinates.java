@@ -7,7 +7,8 @@ package gametools;
  * @author g.lumsden
  * @since 28-May-2019
  */
-public class Coordinates {
+public class Coordinates 
+{
 
     public int x, y, width, height,
             left, right, top, bottom,

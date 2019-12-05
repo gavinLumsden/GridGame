@@ -23,7 +23,8 @@ import javax.swing.SwingConstants;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class GameImage {
+public class GameImage 
+{
 
     private JLabel label;
     private String imageFile;

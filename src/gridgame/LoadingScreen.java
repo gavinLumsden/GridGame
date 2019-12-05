@@ -7,7 +7,8 @@ import javax.swing.Timer;
 /**
  * @author g.lumsden
  */
-public class LoadingScreen extends javax.swing.JFrame {
+public class LoadingScreen extends javax.swing.JFrame 
+{
 
     private final int FORM_WIDTH  = 520; 
     private final int FORM_HEIGHT = 171; 

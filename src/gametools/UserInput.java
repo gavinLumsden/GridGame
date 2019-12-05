@@ -8,7 +8,8 @@ import java.awt.event.KeyEvent;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class UserInput {
+public class UserInput 
+{
 
     private Coordinates source;
     private int numberOfDirections;

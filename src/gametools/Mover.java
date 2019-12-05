@@ -6,7 +6,8 @@ package gametools;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class Mover {
+public class Mover 
+{
 
     private Coordinates source;
     private int numberOfDirections;

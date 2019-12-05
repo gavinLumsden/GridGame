@@ -8,7 +8,8 @@ import javax.swing.JLabel;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class GameObject {
+public class GameObject 
+{
 
     /**
      * Coordinates to store data on position and movement

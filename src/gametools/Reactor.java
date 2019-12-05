@@ -8,7 +8,8 @@ import javax.swing.JLabel;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class Reactor {
+public class Reactor 
+{
 
     private Coordinates source;
     private Coordinates target;

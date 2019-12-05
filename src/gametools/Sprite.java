@@ -11,7 +11,8 @@ import javax.swing.JLabel;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class Sprite {
+public class Sprite 
+{
 
     private LinkedList<Animation> animations;
     private GameImage gameImage;

@@ -3,7 +3,8 @@ package gridgame;
 /**
  * @author g.lumsden
  */
-public interface Icons {
+public interface Icons 
+{
     
     public static final String PATH = "https://drive.google.com/uc?id=";
     

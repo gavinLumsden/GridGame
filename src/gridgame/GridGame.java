@@ -6,4 +6,5 @@ public class GridGame
     public static void main(String[] args) {
         new LoadingScreen(); 
     }
+    
 }

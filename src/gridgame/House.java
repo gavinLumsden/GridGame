@@ -3,7 +3,8 @@ package gridgame;
 /**
  * @author g.lumsden
  */
-public class House {
+public class House 
+{
     
     public Location[][] locations;
     

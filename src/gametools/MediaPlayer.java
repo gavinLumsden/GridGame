@@ -17,7 +17,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author g.lumsden
  * @since 14-May-2019
  */
-public class MediaPlayer {
+public class MediaPlayer 
+{
 
     private AudioInputStream audioStream;
     private Clip clip;
