@@ -39,8 +39,6 @@ public class Grid extends JFrame
         columns              = frameWidth  / tileWidth;
         setTiles();
         boundary             = new Boundary(locations);
-        House house          = new House(locations, this); 
-        Enemy enemy          = new Enemy(locations, this); 
     }
     
     private void setFrame() {

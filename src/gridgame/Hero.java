@@ -92,9 +92,38 @@ public class Hero extends GameCharacter
     @Override
     public void action() {
         mover.move();
-//        check();
+        check();
         animate(); 
         redraw(); 
+    }
+    
+    private void check() {
+        for (int r = 0; r < locations.length; r++) {
+            for (int c = 0; c < locations[0].length; c++) {
+                if (detector.isOverLapping(locations[r][c].tile.tile)) {
+                    if (locations[r][c].type == Types.BOUNDRY) {
+                        moveMap();
+                        return; 
+                    } 
+                    if (locations[r][c].type == Types.ENEMY) {
+                        battle();
+                        return; 
+                    } 
+                    if (locations[r][c].type == Types.HOUSE) {
+                        reactor.stickTo(locations[r][c].tile.tile);
+                        return; 
+                    }
+                }
+            }
+        }
+    }
+    
+    private void moveMap() {
+        System.out.println("move map");
+    }
+    
+    private void battle() {
+        System.out.println("battle");
     }
     
 //    private void check() {

@@ -151,7 +151,7 @@ public class Detector
     /**
      * Determines if overlapping with another game object (the target)
      *
-     * @param target the other game object to check against
+     * @param target the other label to check against
      * @return is overlapping (true) or not (false)
      */
     public boolean isOverLapping(JLabel target) {
@@ -168,7 +168,7 @@ public class Detector
     /**
      * Determines if overlapping vertically with another game object (target)
      *
-     * @param gameObject the other game object to check against
+     * @param label
      * @return is overlapping (true) or not (false)
      */
     public boolean isOverLappingVertically(JLabel label) {
@@ -189,7 +189,7 @@ public class Detector
     /**
      * Determines if overlapping horizontally with another game object (target)
      *
-     * @param gameObject the other game object to check against
+     * @param label
      * @return is overlapping (true) or not (false)
      */
     public boolean isOverLappingHorizontally(JLabel label) {
@@ -210,7 +210,7 @@ public class Detector
     /**
      * Determines if this object is above another game object
      *
-     * @param gameObject the other game object to check against
+     * @param label
      * @return is above the other object (true) or not (false)
      */
     public boolean isAbove(JLabel label) {
@@ -226,7 +226,7 @@ public class Detector
     /**
      * Determines if this object is below another game object
      *
-     * @param gameObject the other game object to check against
+     * @param label
      * @return is below the other object (true) or not (false)
      */
     public boolean isBelow(JLabel label) {
@@ -242,7 +242,7 @@ public class Detector
     /**
      * Determines if this object is left of another game object
      *
-     * @param gameObject the other game object to check against
+     * @param label
      * @return is left of the other object (true) or not (false)
      */
     public boolean isLeftOf(JLabel label) {
@@ -258,7 +258,7 @@ public class Detector
     /**
      * Determines if this object is right of another game object
      *
-     * @param gameObject the other game object to check against
+     * @param label
      * @return is right of the other object (true) or not (false)
      */
     public boolean isRightOf(JLabel label) {
@@ -272,11 +272,11 @@ public class Detector
     }
     
     private void setTarget(JLabel label) {
-        target.x      = label.getX(); 
-        target.y      = label.getY(); 
-        target.width  = label.getWidth(); 
-        target.height = label.getHeight(); 
-        target.recalculate();
+        int x      = label.getX(); 
+        int y      = label.getY(); 
+        int width  = label.getWidth(); 
+        int height = label.getHeight(); 
+        target = new Coordinates(x, y, width, height); 
     }
 
 }
