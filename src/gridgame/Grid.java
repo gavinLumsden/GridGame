@@ -57,6 +57,7 @@ public class Grid extends JFrame
             int x = 0; 
             for (int c = 0; c < locations[0].length; c++) {
                 locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, Map.map[r][c], this); 
+                locations[r][c].draw();
                 x += tileWidth; 
             }
             y += tileWidth; 
