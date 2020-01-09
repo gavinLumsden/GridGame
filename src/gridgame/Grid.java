@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 public class Grid extends JFrame
 {
     
-    public static boolean done; 
     public int frameWidth;
     public int frameHeight;    
     public int tileWidth;
@@ -27,7 +26,6 @@ public class Grid extends JFrame
         setHero(); 
         setActions();
         trim();  
-        done = true; 
     }
 
     private void setDataStructures() {
