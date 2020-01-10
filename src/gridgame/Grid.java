@@ -61,6 +61,7 @@ public class Grid extends JFrame
             }
             y += tileWidth; 
         }
+        generatePatterns(); 
     }
 
     private void setActions() {
@@ -85,11 +86,27 @@ public class Grid extends JFrame
     private void setHero() {
         JLabel heroImage = new JLabel();
         this.getContentPane().add(heroImage);
-        heroImage.setLocation(30, 30);
-        heroImage.setBounds(10, 10, tileWidth, tileHeight);
+        heroImage.setBounds(100, 100, tileWidth, tileHeight);
         heroImage.setOpaque(true);
         this.getContentPane().setComponentZOrder(heroImage, 0);
         hero = new Hero(locations, this, heroImage);
+    }
+
+    private void generatePatterns() {
+        for (int r = 0; r < locations.length; r++) {
+            for (int c = 0; c < locations[0].length; c++) {
+                if (locations[r][c].source == true) {
+                    int sourceType = locations[r][c].sourceType; 
+                    if (sourceType == Types.GRASS)  generate(Types.GRASS, r, c); 
+                    if (sourceType == Types.DIRT)   generate(Types.DIRT, r, c); 
+                    if (sourceType == Types.WATER)  generate(Types.WATER, r, c); 
+                }
+            }
+        }
+    }
+    
+    private void generate(int type, int row, int column) {
+        
     }
     
 }

@@ -13,6 +13,11 @@ public class Types
     public static int TRAINER = 4; 
     public static int HOUSE   = 5;
     
+    public static int RANDOM_TEST = 6;
+    public static int GRASS = 1;
+    public static int DIRT  = 2;
+    public static int WATER = 3;
+    
     public static String GROUND_IMAGE  = PATH + "1Gz5ej43CLhh2wh5sC8FtgmTovHwYRnD3"; 
     public static String WALL_IMAGE    = PATH + "1UUW-d0he25oX9PVgae-1xKcDJFuTx6xh"; 
     public static String BOUNDRY_IMAGE = PATH + "1hsHMe3DqD9yEmUFcWcyYYTbj0BNf82rt"; 

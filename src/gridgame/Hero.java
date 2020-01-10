@@ -101,6 +101,11 @@ public class Hero extends GameCharacter
         for (int r = 0; r < locations.length; r++) {
             for (int c = 0; c < locations[0].length; c++) {
                 if (detector.isOverLapping(locations[r][c].tile.tile)) {
+                    if (locations[r][c].type == Types.WALL || locations[r][c].type == Types.HOUSE) {
+                        reactor.stickTo(locations[r][c].tile.tile);
+                        System.out.println("sticking");
+                        return; 
+                    }
                     if (locations[r][c].type == Types.BOUNDRY) {
                         moveMap();
                         return; 
@@ -109,10 +114,6 @@ public class Hero extends GameCharacter
                         battle();
                         return; 
                     } 
-                    if (locations[r][c].type == Types.WALL || locations[r][c].type == Types.HOUSE) {
-                        reactor.stickTo(locations[r][c].tile.tile);
-                        return; 
-                    }
                 }
             }
         }
