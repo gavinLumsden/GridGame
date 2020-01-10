@@ -18,6 +18,7 @@ public class Location
 
     public void draw() {
         if      (type == Types.GROUND)  tile.setImage(Types.GROUND_IMAGE);
+        else if (type == Types.WALL)    tile.setImage(Types.WALL_IMAGE);
         else if (type == Types.BOUNDRY) tile.setImage(Types.BOUNDRY_IMAGE);
         else if (type == Types.ENEMY)   tile.setImage(Types.ENEMY_IMAGE);
         else if (type == Types.HOUSE)   tile.setImage(Types.HOUSE_IMAGE);

@@ -109,7 +109,7 @@ public class Hero extends GameCharacter
                         battle();
                         return; 
                     } 
-                    if (locations[r][c].type == Types.HOUSE) {
+                    if (locations[r][c].type == Types.WALL || locations[r][c].type == Types.HOUSE) {
                         reactor.stickTo(locations[r][c].tile.tile);
                         return; 
                     }

@@ -26,6 +26,7 @@ public class Grid extends JFrame
         setHero(); 
         setActions();
         trim();  
+        this.setVisible(true);
     }
 
     private void setDataStructures() {
@@ -84,6 +85,7 @@ public class Grid extends JFrame
     private void setHero() {
         JLabel heroImage = new JLabel();
         this.getContentPane().add(heroImage);
+        heroImage.setLocation(30, 30);
         heroImage.setBounds(10, 10, tileWidth, tileHeight);
         heroImage.setOpaque(true);
         this.getContentPane().setComponentZOrder(heroImage, 0);
