@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 public class Grid extends JFrame
 {
     
+    public Map map; 
+    
     public int frameWidth;
     public int frameHeight;    
     public int tileWidth;
@@ -30,10 +32,10 @@ public class Grid extends JFrame
     }
 
     private void setDataStructures() {
-        frameWidth           = 1900;
-        frameHeight          = 1000;
-        tileWidth            = 90;
-        tileHeight           = 90;
+        frameWidth           = map.map.length;
+        frameHeight          = map.map[0].length;
+        tileWidth            = 100;
+        tileHeight           = 100;
         rows                 = frameHeight / tileHeight;
         columns              = frameWidth  / tileWidth;
         setTiles();
@@ -97,7 +99,11 @@ public class Grid extends JFrame
             for (int c = 0; c < locations[0].length; c++) {
                 if (locations[r][c].source == true) {
                     int sourceType = locations[r][c].sourceType; 
-                    if (sourceType == Types.GRASS)  generate(Types.GRASS, r, c); 
+                    if (sourceType == Types.GRASS)  {
+                        locations[r][c].type = Types.GRASS;
+                        int random = random(1, 9); 
+                        locations[r][c].tile.setImage(Types.GRASS_IMAGES[random]);
+                    }  
                     if (sourceType == Types.DIRT)   generate(Types.DIRT, r, c); 
                     if (sourceType == Types.WATER)  generate(Types.WATER, r, c); 
                 }
@@ -107,6 +113,22 @@ public class Grid extends JFrame
     
     private void generate(int type, int row, int column) {
         
+    }
+    
+    /**
+     * Generates a random number
+     *
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @return the generated number
+     */
+    private int random(int low, int high) {
+        double seed = Math.random();
+        double L = (double) low;
+        double H = (double) high;
+        double number = (H - L + 1) * seed + L;
+        int answer = (int) number;
+        return answer;
     }
     
 }

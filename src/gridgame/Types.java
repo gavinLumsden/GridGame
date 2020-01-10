@@ -6,24 +6,49 @@ public class Types
 {
     public static final String PATH = "https://drive.google.com/uc?id=";
     
-    public static int GROUND  = 0;
-    public static int WALL    = 1; 
-    public static int BOUNDRY = 2;
-    public static int ENEMY   = 3;
-    public static int TRAINER = 4; 
-    public static int HOUSE   = 5;
+    public static int BLANK   = 0;
+    public static int GRASS   = 1;
+    public static int DIRT    = 2;
+    public static int WATER   = 3;
+    public static int ENEMY   = 4;
+    public static int TRAINER = 5; 
+    public static int BOUNDRY = 6;
     
-    public static int RANDOM_TEST = 6;
-    public static int GRASS = 1;
-    public static int DIRT  = 2;
-    public static int WATER = 3;
-    
-    public static String GROUND_IMAGE  = PATH + "1Gz5ej43CLhh2wh5sC8FtgmTovHwYRnD3"; 
-    public static String WALL_IMAGE    = PATH + "1UUW-d0he25oX9PVgae-1xKcDJFuTx6xh"; 
+    public static String BLANK_IMAGE    = PATH + "1hsHMe3DqD9yEmUFcWcyYYTbj0BNf82rt"; 
+    public static String[] GRASS_IMAGES = {
+        PATH + "1TIOnvURt7b61y254cBnxgNXNrVUxdZ33", 
+        PATH + "1eYni2BLUzN2ar3DRnvcgYIHhFirWXYGR", 
+        PATH + "1nVrk1IsfMpVMBjcHSYkaaxOSH0dPijfD", 
+        PATH + "1aCzIUiwcrlORgMiljPd4wpfepE3DV8zO", 
+        PATH + "1k_nGP8eBBn1qpSjVEyZXJ4cErg1pLCqz", 
+        PATH + "1o1slSVASI5x0tBJzrtuJ0tdrKmNEeujD", 
+        PATH + "1PE8FwIQpm-o_y0Ps1_2dQR0RUiIocPWo", 
+        PATH + "13U-wYBLrSYHJwwDDMD6q3HerYvJO5UMO", 
+        PATH + "1kxzEnoP1IsPB5Z_EnIwZDcOr198IYMI7"}; 
+    public static String[] DIRT_IMAGES = {
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + ""}; 
+    public static String[] WATER_IMAGES = {
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + "", 
+        PATH + ""}; 
     public static String BOUNDRY_IMAGE = PATH + "1hsHMe3DqD9yEmUFcWcyYYTbj0BNf82rt"; 
     public static String ENEMY_IMAGE   = PATH + "10G3VmBGb9jCawlQeHUfbdQZLN5ARGGw9"; 
-    public static String HOUSE_IMAGE   = PATH + "1G7LiC15joJFSGrlvGOENsxqT7ODdYG4z"; 
     public static String HERO_IMAGE    = PATH + "1oAxS9-vUv4bVUqD1FvMSogPKluDrAzLt"; 
+    
     public static Color  BACKGROUND    = Color.WHITE;
-              
+    
 }
