@@ -17,21 +17,32 @@ public class Location
         this.type   = type;
         this.tile   = new Tile(tileWidth, tileHeight, x, y, grid);
     }
-
+    
     public void draw() {
-        if      (type == Types.GROUND)  tile.setImage(Types.GROUND_IMAGE);
-        else if (type == Types.WALL)    tile.setImage(Types.WALL_IMAGE);
-        else if (type == Types.BOUNDRY) tile.setImage(Types.BOUNDRY_IMAGE);
+        if      (type == Types.BLANK)   tile.setImage(Types.BLANK_IMAGE);
+        else if (type == Types.GRASS)   setSource(Types.GRASS); 
+        else if (type == Types.DIRT)    setSource(Types.DIRT); 
+        else if (type == Types.WATER)   setSource(Types.WATER); 
         else if (type == Types.ENEMY)   tile.setImage(Types.ENEMY_IMAGE);
-        else if (type == Types.HOUSE)   tile.setImage(Types.HOUSE_IMAGE);
-        else if (type == Types.RANDOM_TEST) setSource(); 
+        else if (type == Types.BOUNDRY) tile.setImage(Types.BLANK_IMAGE);
     }
     
-    private void setSource() {
-        int random = random(1, 3); 
-        if (random == Types.GRASS) sourceType = Types.GRASS; 
-        if (random == Types.DIRT)  sourceType = Types.DIRT; 
-        if (random == Types.WATER) sourceType = Types.WATER; 
+    private void setSource(int type) {
+        if (type == Types.GRASS) {
+            sourceType = Types.GRASS;
+            int random = random(1, Types.GRASS_IMAGES.length); 
+            tile.setImage(Types.GRASS_IMAGES[random]);
+        } 
+        if (type == Types.DIRT)  {
+            sourceType = Types.DIRT;
+            int random = random(1, Types.DIRT_IMAGES.length); 
+            tile.setImage(Types.DIRT_IMAGES[random]);
+        } 
+        if (type == Types.WATER) {
+            sourceType = Types.WATER;
+            int random = random(1, Types.WATER_IMAGES.length); 
+            tile.setImage(Types.WATER_IMAGES[random]);
+        } 
     }
     
     /**

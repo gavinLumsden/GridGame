@@ -11,7 +11,6 @@ public class Types
     public static int DIRT    = 2;
     public static int WATER   = 3;
     public static int ENEMY   = 4;
-    public static int TRAINER = 5; 
     public static int BOUNDRY = 6;
     
     public static String BLANK_IMAGE    = PATH + "1hsHMe3DqD9yEmUFcWcyYYTbj0BNf82rt"; 
