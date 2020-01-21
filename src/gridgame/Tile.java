@@ -3,6 +3,7 @@ package gridgame;
 import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,11 +23,12 @@ public class Tile
         frame.getContentPane().add(tile);
         tile.setBounds(x, y, width, height);
         tile.setOpaque(true);
+        tile.setBorder(BorderFactory.createEtchedBorder());
     }
 
     public void setColor(Color color) {
         tile.setBackground(color);
-        tile.setBorder(null);                  // remove border
+//        tile.setBorder(null);                  // remove border
         tile.setOpaque(false);                 // remove background color
     }
     
@@ -35,7 +37,7 @@ public class Tile
             this.imageFile = imageFile; 
             setLabelIcon();
         }            
-        tile.setBorder(null);                  // remove border
+//        tile.setBorder(null);                  // remove border
         tile.setOpaque(false);                 // remove background color
         show();                                // display picturebox 
     }

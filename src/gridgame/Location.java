@@ -30,17 +30,17 @@ public class Location
     private void setSource(int type) {
         if (type == Types.GRASS) {
             sourceType = Types.GRASS;
-            int random = random(1, Types.GRASS_IMAGES.length); 
+            int random = random(0, Types.GRASS_IMAGES.length-1); 
             tile.setImage(Types.GRASS_IMAGES[random]);
         } 
         if (type == Types.DIRT)  {
             sourceType = Types.DIRT;
-            int random = random(1, Types.DIRT_IMAGES.length); 
+            int random = random(0, Types.DIRT_IMAGES.length-1); 
             tile.setImage(Types.DIRT_IMAGES[random]);
         } 
         if (type == Types.WATER) {
             sourceType = Types.WATER;
-            int random = random(1, Types.WATER_IMAGES.length); 
+            int random = random(0, Types.WATER_IMAGES.length-1); 
             tile.setImage(Types.WATER_IMAGES[random]);
         } 
     }

@@ -36,8 +36,8 @@ public class Grid extends JFrame
         frameHeight          = map.map[0].length;
         tileWidth            = 100;
         tileHeight           = 100;
-        rows                 = frameHeight / tileHeight;
-        columns              = frameWidth  / tileWidth;
+        rows                 = map.map.length;
+        columns              = map.map[0].length;
         setTiles();
         boundary             = new Boundary(locations);
     }
@@ -54,16 +54,17 @@ public class Grid extends JFrame
     private void setTiles() {
         locations = new Location[rows][columns];
         int y = 0; 
-        for (int r = 0; r < locations.length; r++) {
+        for (int r = 0; r < rows; r++) {
             int x = 0; 
-            for (int c = 0; c < locations[0].length; c++) {
-                locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, Map.map[r][c], this); 
+            for (int c = 0; c < columns; c++) {
+                int type = Map.map[r][c]; 
+                locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, type, this); 
                 locations[r][c].draw();
                 x += tileWidth; 
             }
             y += tileWidth; 
         }
-        generatePatterns(); 
+//        generatePatterns(); 
     }
 
     private void setActions() {

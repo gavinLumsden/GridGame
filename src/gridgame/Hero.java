@@ -120,7 +120,7 @@ public class Hero extends GameCharacter
     }
     
     private void moveMap() {
-        System.out.println("move map");
+//        System.out.println("move map");
     }
     
     private void battle() {
