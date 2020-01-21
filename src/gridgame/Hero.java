@@ -23,6 +23,7 @@ public class Hero extends GameCharacter
     }
     
     private void setAnimations() {
+        System.out.println("setting hero animations");
         LinkedList<String> walkUpFiles = new LinkedList<>();
         walkUpFiles.add(Icons.BANDIT_WALK_UP_1);
         walkUpFiles.add(Icons.BANDIT_IDLE_UP);
@@ -87,6 +88,7 @@ public class Hero extends GameCharacter
 
         sprite.setAnimations(animations);
         sprite.animate(5);
+        System.out.println("hero animations set");
     }
 
     @Override

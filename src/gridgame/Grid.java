@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 
 public class Grid extends JFrame
 {
-    
     public Map map; 
     
     public int frameWidth;
@@ -30,12 +29,12 @@ public class Grid extends JFrame
         trim();  
         this.setVisible(true);
     }
-
+    
     private void setDataStructures() {
         frameWidth           = map.map.length;
         frameHeight          = map.map[0].length;
-        tileWidth            = 100;
-        tileHeight           = 100;
+        tileWidth            = 80;
+        tileHeight           = 80;
         rows                 = map.map.length;
         columns              = map.map[0].length;
         setTiles();
@@ -43,27 +42,27 @@ public class Grid extends JFrame
     }
     
     private void setFrame() {
+        System.out.println("setting frame");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
         setUndecorated(true);
         setBackground(Types.BACKGROUND);
         getContentPane().setBackground(Types.BACKGROUND);        
         setSize(frameWidth, frameHeight);
+        System.out.println("frame set");
     }
     
     private void setTiles() {
+        System.out.println("setting tiles");
+        
+        Chunk1 chunk1 = new Chunk1(locations, this); 
+        Chunk2 chunk2 = new Chunk2(locations, this); 
+        Chunk3 chunk3 = new Chunk3(locations, this); 
+        Chunk4 chunk4 = new Chunk4(locations, this); 
+        
         locations = new Location[rows][columns];
-        int y = 0; 
-        for (int r = 0; r < rows; r++) {
-            int x = 0; 
-            for (int c = 0; c < columns; c++) {
-                int type = Map.map[r][c]; 
-                locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, type, this); 
-                locations[r][c].draw();
-                x += tileWidth; 
-            }
-            y += tileWidth; 
-        }
+        
+        System.out.println("tiles set");
 //        generatePatterns(); 
     }
 
@@ -80,22 +79,27 @@ public class Grid extends JFrame
     }
 
     public void trim() {
+        System.out.println("trimming form");
         frameHeight -= (frameHeight - (locations.length * tileHeight));
         frameWidth -= (frameWidth - (locations[0].length * tileWidth));
         this.setSize(frameWidth, frameHeight);
         this.setLocationRelativeTo(null);
+        System.out.println("form trimmed");
     }
 
     private void setHero() {
+        System.out.println("setting hero");
         JLabel heroImage = new JLabel();
         this.getContentPane().add(heroImage);
         heroImage.setBounds(100, 100, tileWidth, tileHeight);
         heroImage.setOpaque(true);
         this.getContentPane().setComponentZOrder(heroImage, 0);
         hero = new Hero(locations, this, heroImage);
+        System.out.println("hero set");
     }
 
     private void generatePatterns() {
+        System.out.println("generating patterns");
         for (int r = 0; r < locations.length; r++) {
             for (int c = 0; c < locations[0].length; c++) {
                 if (locations[r][c].source == true) {
@@ -110,6 +114,7 @@ public class Grid extends JFrame
                 }
             }
         }
+        System.out.println("patterns set");
     }
     
     private void generate(int type, int row, int column) {
@@ -131,5 +136,7 @@ public class Grid extends JFrame
         int answer = (int) number;
         return answer;
     }
+
+    
     
 }
