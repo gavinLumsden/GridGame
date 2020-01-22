@@ -40,4 +40,9 @@ public class Chunk1 implements Runnable {
         }
     }
     
+    public Location getLocation(int row, int column) {
+        if (locations[row][column] != null) return locations[row][column]; 
+        else return null; 
+    }
+    
 }
