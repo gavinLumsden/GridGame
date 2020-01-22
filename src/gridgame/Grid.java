@@ -30,7 +30,7 @@ public class Grid extends JFrame
         trim();  
         System.out.println("grid created");
         this.setVisible(true);
-        System.out.println("iytoyu");
+        System.out.println("awret");
     }
     
     private void setDataStructures() {
@@ -162,6 +162,4 @@ public class Grid extends JFrame
         return answer;
     }
 
-    
-    
 }

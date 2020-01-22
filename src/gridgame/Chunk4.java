@@ -26,9 +26,10 @@ public class Chunk4 implements Runnable {
     }
 
     @Override
-    public void run() {int y = 0; 
+    public void run() {
+        int y = rowSizeLow*tileWidth; 
         for (int r = rowSizeLow; r <= rowSizeHigh; r++) {
-            int x = 0; 
+            int x = columnSizeLow*tileWidth; 
             for (int c = columnSizeLow; c <= columnSizeHigh; c++) {
                 System.out.println("setting tile: row: " + r + " column: " + c);
                 int type = Map.map[r][c];

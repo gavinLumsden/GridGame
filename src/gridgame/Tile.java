@@ -25,12 +25,11 @@ public class Tile
         this.height = height; 
         tile.setBounds(x, y, width, height);
         tile.setOpaque(true);
-        tile.setBorder(BorderFactory.createEtchedBorder());
     }
 
     public void setColor(Color color) {
         tile.setBackground(color);
-//        tile.setBorder(null);                  // remove border
+        tile.setBorder(null);                  // remove border
         tile.setOpaque(false);                 // remove background color
     }
     
@@ -39,7 +38,7 @@ public class Tile
             this.imageFile = imageFile; 
             setLabelIcon();
         }            
-//        tile.setBorder(null);                  // remove border
+        tile.setBorder(null);                  // remove border
         tile.setOpaque(false);                 // remove background color
         show();                                // display picturebox 
     }
