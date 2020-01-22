@@ -44,7 +44,7 @@ public class Types
         PATH + "", 
         PATH + "", 
         PATH + ""}; 
-    public static String BOUNDRY_IMAGE = PATH + "1hsHMe3DqD9yEmUFcWcyYYTbj0BNf82rt"; 
+    public static String BOUNDRY_IMAGE = PATH + "1TIOnvURt7b61y254cBnxgNXNrVUxdZ33"; 
     public static String ENEMY_IMAGE   = PATH + "10G3VmBGb9jCawlQeHUfbdQZLN5ARGGw9"; 
     public static String HERO_IMAGE    = PATH + "1oAxS9-vUv4bVUqD1FvMSogPKluDrAzLt"; 
     

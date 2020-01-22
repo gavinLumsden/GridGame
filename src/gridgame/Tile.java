@@ -21,6 +21,8 @@ public class Tile
     public Tile(int width, int height, int x, int y, JFrame frame) {
         tile = new JLabel();
         frame.getContentPane().add(tile);
+        this.width = width; 
+        this.height = height; 
         tile.setBounds(x, y, width, height);
         tile.setOpaque(true);
         tile.setBorder(BorderFactory.createEtchedBorder());

@@ -13,11 +13,11 @@ public class Chunk2 implements Runnable {
     public int tileWidth = 80; 
     public int tileHeight = 80; 
     
-    public int rowSizeLow = 9;
-    public int rowSizeHigh = 18;
+    public int rowSizeLow = 11;
+    public int rowSizeHigh = 20;
     
-    public int columnSizeLow = 21;
-    public int columnSizeHigh = 42;
+    public int columnSizeLow = 0;
+    public int columnSizeHigh = 84;
     
     public Chunk2(Location[][] locations, Grid grid) {
         this.locations = locations; 
@@ -27,11 +27,12 @@ public class Chunk2 implements Runnable {
 
     @Override
     public void run() {int y = 0; 
-        for (int r = rowSizeLow; r < rowSizeHigh; r++) {
+        for (int r = rowSizeLow; r <= rowSizeHigh; r++) {
             int x = 0; 
-            for (int c = columnSizeLow; c < columnSizeHigh; c++) {
+            for (int c = columnSizeLow; c <= columnSizeHigh; c++) {
                 System.out.println("setting tile: row: " + r + " column: " + c);
-                locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, grid); 
+                int type = Map.map[r][c];
+                locations[r][c] = new Location(r, c, x, y, tileWidth, tileHeight, type, grid); 
                 locations[r][c].draw();
                 x += tileWidth; 
             }
