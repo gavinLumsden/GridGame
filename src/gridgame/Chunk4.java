@@ -5,6 +5,11 @@ package gridgame;
  */
 public class Chunk4 implements Runnable {
     
+    public Thread thread; 
+    
+    public Location[][] locations; 
+    public Grid grid; 
+    
     public int tileWidth = 80; 
     public int tileHeight = 80; 
     
@@ -15,7 +20,13 @@ public class Chunk4 implements Runnable {
     public int columnSizeHigh = 85;
     
     public Chunk4(Location[][] locations, Grid grid) {
-        int y = 0; 
+        this.locations = locations; 
+        this.grid      = grid;  
+        thread = new Thread(this); 
+    }
+
+    @Override
+    public void run() {int y = 0; 
         for (int r = rowSizeLow; r < rowSizeHigh; r++) {
             int x = 0; 
             for (int c = columnSizeLow; c < columnSizeHigh; c++) {
@@ -26,11 +37,6 @@ public class Chunk4 implements Runnable {
             }
             y += tileHeight; 
         }
-    }
-
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

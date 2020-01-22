@@ -38,7 +38,6 @@ public class Grid extends JFrame
         rows                 = map.map.length;
         columns              = map.map[0].length;
         setTiles();
-        boundary             = new Boundary(locations);
     }
     
     private void setFrame() {
@@ -53,16 +52,59 @@ public class Grid extends JFrame
     }
     
     private void setTiles() {
-        System.out.println("setting tiles");
+        System.out.println("setting tChungusiles");
+        locations = new Location[rows][columns];
         
         Chunk1 chunk1 = new Chunk1(locations, this); 
         Chunk2 chunk2 = new Chunk2(locations, this); 
         Chunk3 chunk3 = new Chunk3(locations, this); 
         Chunk4 chunk4 = new Chunk4(locations, this); 
         
-        locations = new Location[rows][columns];
+        chunk1.thread.start(); 
+        chunk2.thread.start(); 
+        chunk3.thread.start(); 
+        chunk4.thread.start(); 
+        
+        boolean doneSet = false; 
+        
+        while(doneSet != true) {
+            for (int r = chunk1.rowSizeLow; r < chunk1.rowSizeHigh; r++) {
+                for (int c = chunk1.columnSizeLow; c < chunk1.columnSizeHigh; c++) {
+                    locations[chunk1.rowSizeLow][chunk1.columnSizeLow] = chunk1.locations[r][c]; 
+                }
+            }
+            for (int r = chunk2.rowSizeLow; r < chunk2.rowSizeHigh; r++) {
+                for (int c = chunk2.columnSizeLow; c < chunk2.columnSizeHigh; c++) {
+                    locations[chunk2.rowSizeLow][chunk2.rowSizeLow] = chunk2.locations[r][c]; 
+                }
+            }
+            for (int r = chunk3.rowSizeLow; r < chunk3.rowSizeHigh; r++) {
+                for (int c = chunk3.columnSizeLow; c < chunk3.columnSizeHigh; c++) {
+                    locations[chunk3.rowSizeLow][chunk3.rowSizeLow] = chunk3.locations[r][c]; 
+                }
+            }
+            for (int r = chunk4.rowSizeLow; r < chunk4.rowSizeHigh; r++) {
+                for (int c = chunk4.columnSizeLow; c < chunk4.columnSizeHigh; c++) {
+                    locations[chunk4.rowSizeLow][chunk4.rowSizeLow] = chunk4.locations[r][c]; 
+                }
+            }
+        }
+        
+        boolean doneDraw = false; 
+        
+        while(doneDraw != true) {
+            for (int r = 0; r < locations.length; r++) {
+                for (int c = 0; c < locations[r].length; c++) {
+                    System.out.println("Drawing: row: " + r + " column: " + c);
+                    locations[r][c].draw();
+                    if (r == locations.length && c == locations[r].length) doneDraw = true; 
+                }
+            }
+        }
         
         System.out.println("tiles set");
+        
+        boundary             = new Boundary(locations);
 //        generatePatterns(); 
     }
 
